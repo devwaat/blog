@@ -1,7 +1,9 @@
 import { Meteor } from 'meteor/meteor'
 import React from 'react'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+// import { BaseForm } from 'uniforms-unstyled'
 
-class Login extends React.Component {
+class BlogLogin extends React.Component {
 
   constructor (props) {
     super(props)
@@ -17,8 +19,8 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = {}
+BlogLogin.propTypes = {}
 
-Login.defaultProps = {}
+BlogLogin.defaultProps = {}
 
-export default Login
+export default BlogLogin

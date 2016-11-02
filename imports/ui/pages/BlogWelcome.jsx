@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import React from 'react'
 
-class Read extends React.Component {
+class BlogWelcome extends React.Component {
 
   constructor (props) {
     super(props)
@@ -11,14 +11,14 @@ class Read extends React.Component {
   render () {
     return (
       <div>
-        <p>you can't read yet</p>
+        <p>this is not a blog... yet</p>
       </div>
     )
   }
 }
 
-Read.propTypes = {}
+BlogWelcome.propTypes = {}
 
-Read.defaultProps = {}
+BlogWelcome.defaultProps = {}
 
-export default Read
+export default BlogWelcome
