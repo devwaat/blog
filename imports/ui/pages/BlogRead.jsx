@@ -9,6 +9,7 @@ class BlogRead extends React.Component {
   }
 
   render () {
+    console.log(this.props.blogEntries)
     return (
       <div>
         <p>you can't read yet</p>

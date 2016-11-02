@@ -22,3 +22,4 @@ react-meteor-data
 check
 aldeed:simple-schema
 mdg:validated-method
+session
