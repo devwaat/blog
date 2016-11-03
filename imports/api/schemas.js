@@ -4,12 +4,19 @@ export const UserLoginSchema = new SimpleSchema({
   username: {
     type: String,
     label: 'Username',
-    optional: false
+    optional: false,
+    min: 6
   },
   password: {
     type: String,
     label: 'Password',
-    optional: false
+    optional: false,
+    min: 6
+  },
+  showpass: {
+    type: Boolean,
+    label: 'Show password',
+    optional: true
   }
 })
 

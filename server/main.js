@@ -1,15 +1,17 @@
 import { Meteor } from 'meteor/meteor'
 import '../imports/startup/server'
 
-// initial dummy data
+// initial dummy data imports
 import { BlogEntries } from '../imports/api/collections.js'
+import { Accounts } from 'meteor/accounts-base'
+import { Roles } from 'meteor/alanning:roles'
 
 Meteor.startup(() => {
   // dummy data
   const data = [
     {
       title: 'Blog entry 5',
-      text: 'Text of blog entry 5\n\n\n\n\n the end...'
+      text: 'Text of blog entry 5\n this blog entry contains the word hello \n\n\n\n the end...'
     },
     {
       title: 'Blog entry 4',
@@ -21,7 +23,7 @@ Meteor.startup(() => {
     },
     {
       title: 'Blog entry 2',
-      text: 'Text of blog entry 2\n\n\n\n\n the end...'
+      text: 'Text of blog entry 2\n\n this blog entry contains the word world\n\n\n the end...'
     },
     {
       title: 'Blog entry 1',
@@ -39,5 +41,13 @@ Meteor.startup(() => {
         }
       })
     })
+  }
+
+  if (Meteor.users.find().fetch().length === 0) {
+    let id = Accounts.createUser({username: 'blog-admin', email: 'admin@blog.com', password: 'blog-admin'})
+    Roles.addUsersToRoles(id, ['admin'])
+
+    id = Accounts.createUser({username: 'test-user', email: 'test@blog.com', password: 'test-user'})
+    Roles.addUsersToRoles(id, ['other'])
   }
 })

@@ -23,3 +23,6 @@ check
 aldeed:simple-schema
 mdg:validated-method
 session
+accounts-ui
+accounts-password
+alanning:roles
