@@ -3,6 +3,7 @@ import React from 'react'
 import { UserLoginSchema } from '../../api/schemas.js'
 import { AutoForm, TextField, SubmitField, BoolField, ErrorsField } from 'uniforms-unstyled'
 import { Accounts } from 'meteor/accounts-base'
+import { Roles } from 'meteor/alanning:roles'
 import { browserHistory } from 'react-router'
 
 class BlogLogin extends React.Component {
@@ -31,21 +32,22 @@ class BlogLogin extends React.Component {
   }
 
   loginWithPassword () {
-    Meteor.loginWithPassword(this.username, this.password, (err) => {
-      if (err) {
-        console.log('erro: ' + err.reason)
-      } else {
-        browserHistory.push('/write-blog')
-      }
+    if (this.username !== '' && this.password !== '') {
+      Meteor.loginWithPassword(this.username, this.password, (err) => {
+        if (err) {
+          console.log(err.reason)
+        } else {
+          Roles.userIsInRole(Meteor.userId(), 'admin') ? browserHistory.push('/blog_write') : console.log('\'ADMIN\' profile required to publish on blog')
+        }
+      })
     }
-    )
   }
 
   render () {
     return (
       <div>
         <h1> Hello </h1>
-        <AutoForm schema={UserLoginSchema} onSubmit={doc => console.log(doc)}>
+        <AutoForm schema={UserLoginSchema} validate='onChangeAfterSubmit'>
           <TextField name='username' onBlur={this.usernameBlur}/>
           <TextField name='password' onBlur={this.passwordBlur} type={this.state.showPass ? 'text' : 'password'}/>
           <BoolField name='showpass' type='checkbox' onClick={this.toggleShowPass}>Show password</BoolField>
