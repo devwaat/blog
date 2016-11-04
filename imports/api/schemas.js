@@ -17,6 +17,35 @@ export const UserLoginSchema = new SimpleSchema({
     type: Boolean,
     label: 'Show password',
     optional: true
+  },
+  submitErr: {
+    type: String,
+    label: 'Submit Error',
+    optional: true
+  }
+})
+
+export const BlogSubmitSchema = new SimpleSchema({
+  title: {
+    type: String,
+    label: 'Title',
+    max: 150,
+    optional: false
+  },
+  text: {
+    type: String,
+    label: 'Text',
+    optional: false
+  },
+  published: {
+    type: Boolean,
+    label: 'Published',
+    optional: true
+  },
+  submitMsg: {
+    type: String,
+    label: 'Submit Error',
+    optional: true
   }
 })
 
@@ -33,7 +62,7 @@ export const BlogEntrySchema = new SimpleSchema({
   },
   text: {
     type: String,
-    label: 'Title',
+    label: 'Text',
     optional: false
   },
   published: {
