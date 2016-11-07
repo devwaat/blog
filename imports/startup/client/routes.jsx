@@ -4,6 +4,7 @@ import BlogWelcome from '../../ui/pages/BlogWelcome.jsx'
 import BlogLogin from '../../ui/pages/BlogLogin.jsx'
 import BlogWrite from '../../ui/pages/BlogWrite.jsx'
 import BlogReadContainer from '../../ui/containers/BlogReadContainer.jsx'
+import BlogReadEntry from '../../ui/pages/BlogReadEntry.jsx'
 
 export const routes = () => (
   <Router history={browserHistory}>
@@ -11,5 +12,6 @@ export const routes = () => (
     <Route path='/blog_login' component={BlogLogin}/>
     <Route path='/blog_read' component={BlogReadContainer}/>
     <Route path='/blog_write' component={BlogWrite}/>
+    <Route path='/blog_entry_detail(/:title)(/:text)(/:author)' component={BlogReadEntry}/>
   </Router>
 )

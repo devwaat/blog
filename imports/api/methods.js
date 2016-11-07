@@ -4,6 +4,14 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method'
 import { BlogEntrySchema } from '../api/schemas.js'
 import { Roles } from 'meteor/alanning:roles'
 
+export const blogEntriesCount = new ValidatedMethod({
+  name: 'blogEntriesCount',
+  validate: null,
+  run () {
+    return BlogEntries.find().count()
+  }
+})
+
 export const publishBlogEntry = new ValidatedMethod({
   name: 'publishBlogEntry',
   validate: BlogEntrySchema.validator(),
@@ -15,7 +23,7 @@ export const publishBlogEntry = new ValidatedMethod({
       throw new Meteor.Error(null, '\'admin\' role required to publish on blog!')
     }
 
-    author = 'undisclosed' || Meteor.users.findOne({_id: this.userId}, {fields: {username: 1}}).username
+    author = Meteor.users.findOne({_id: this.userId}, {fields: {username: 1}}).username || 'undisclosed'
 
     if (BlogEntries.find({title: title, text: text}).count() === 0) {
       BlogEntries.insert({
