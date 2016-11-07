@@ -2,15 +2,13 @@ import { Meteor } from 'meteor/meteor'
 import { BlogEntries } from '../collections.js'
 import { BlogEntriesPubSchema } from '../schemas.js'
 
-Meteor.publish('blogEntries.public', function (limit, skip) {
-  BlogEntriesPubSchema.validate({limit, skip})
+Meteor.publish('blogEntries.public', function (searchVal) {
+  BlogEntriesPubSchema.validate({searchVal})
 
-  const options = {
-    fields: BlogEntries.publicFields,
-    sort: {updatedate: -1},
-    limit: limit,
-    skip: skip
+  if (!searchVal) {
+    return BlogEntries.find({}, BlogEntries.publicFields)
+  } else {
+    return BlogEntries.find({$text: {$search: searchVal}},
+                            BlogEntries.publicFields)
   }
-  // check published field on find selector!
-  return BlogEntries.find({}, options)
 })

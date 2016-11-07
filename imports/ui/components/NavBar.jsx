@@ -1,6 +1,6 @@
 import React from 'react'
 
-class MenuBar extends React.Component {
+class NavBar extends React.Component {
 
   constructor (props) {
     super(props)
@@ -20,7 +20,7 @@ class MenuBar extends React.Component {
 
 }
 
-MenuBar.propTypes = {
+NavBar.propTypes = {
   className: React.PropTypes.string,
   items: React.PropTypes.arrayOf(React.PropTypes.shape({
     className: React.PropTypes.string,
@@ -29,6 +29,6 @@ MenuBar.propTypes = {
   })).isRequired
 }
 
-MenuBar.defaultProps = {}
+NavBar.defaultProps = {}
 
-export default MenuBar
+export default NavBar

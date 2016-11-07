@@ -1,0 +1,3 @@
+// text index on BlogEntries text field to allow search
+
+db.blogEntries.createIndex({text: 'text'})

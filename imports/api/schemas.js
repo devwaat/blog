@@ -78,12 +78,8 @@ export const BlogEntrySchema = new SimpleSchema({
 })
 
 export const BlogEntriesPubSchema = new SimpleSchema({
-  limit: {
-    type: Number,
-    optional: true
-  },
-  skip: {
-    type: Number,
+  searchVal: {
+    type: String,
     optional: true
   }
 })

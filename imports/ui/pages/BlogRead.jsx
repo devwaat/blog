@@ -5,11 +5,12 @@ import React from 'react'
 import { Meteor } from 'meteor/meteor'
 import TextBox from '../components/TextBox.jsx'
 import Button from '../components/Button.jsx'
-import MenuBar from '../components/MenuBar.jsx'
+import NavBar from '../components/NavBar.jsx'
+import InputText from '../components/InputText.jsx'
 import { Session } from 'meteor/session'
 import { browserHistory } from 'react-router'
 
-class ReadStories extends React.Component {
+class BlogRead extends React.Component {
 
   constructor (props) {
     super(props)
@@ -18,6 +19,7 @@ class ReadStories extends React.Component {
     this.handlePrevious = this.handlePrevious.bind(this)
     this.handleHome = this.handleHome.bind(this)
     this.handleUser = this.handleUser.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
     this.nrCols = 4
   }
 
@@ -39,6 +41,11 @@ class ReadStories extends React.Component {
     var curr = Session.get('blogEntriesSkip')
     curr = curr - this.nrCols
     Session.set('blogEntriesSkip', curr)
+  }
+
+  handleSearch (event) {
+    console.log(event.target.value)
+    Session.set('blogSearch', event.target.value)
   }
 
   resizeTitle (title) {
@@ -84,7 +91,8 @@ class ReadStories extends React.Component {
 
     return (
       <div className= 'stories-feed'>
-        <MenuBar className='stories-feed-menu-bar' items={[
+        <InputText className='stories-search' placeholder='Search' onChange={this.handleSearch}/>
+        <NavBar className='stories-feed-menu-bar' items={[
           {className: 'stories-feed-menu-bar-home', display: 'Home', handleClick: this.handleHome},
           {className: 'stories-feed-menu-bar-user', display: userDisplay, handleClick: this.handleUser}
         ]}/>
@@ -94,7 +102,6 @@ class ReadStories extends React.Component {
         <div className='stories-feed-stories'>
         {this.props.blogEntries.map((entry, i) => {
           if (i < this.nrCols) {
-            console.log('text: ' + entry.text)
             return <TextBox key={i} className='stories-feed-stories-story' title={entry.title} resizedTitle={this.resizeTitle(entry.title)} resizedText={this.resizeEntry(entry.text)} text={entry.text} date={this.formatDate(entry.updateDate)} author={entry.author}/>
           }
         })
@@ -109,10 +116,10 @@ class ReadStories extends React.Component {
   }
 }
 
-ReadStories.propTypes = {
+BlogRead.propTypes = {
   blogEntries: React.PropTypes.array
 }
 
-ReadStories.defaultProps = {}
+BlogRead.defaultProps = {}
 
-export default ReadStories
+export default BlogRead

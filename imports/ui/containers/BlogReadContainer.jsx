@@ -6,7 +6,7 @@ import { Session } from 'meteor/session'
 
 export default createContainer(() => {
   let blogEntries = []
-  let blogHandle = Meteor.subscribe('blogEntries.public', Session.get('blogEntriesLimit'), Session.get('blogEntriesSkip'))
+  let blogHandle = Meteor.subscribe('blogEntries.public', Session.get('blogSearch'))
   let cursor
 
   let options = {
