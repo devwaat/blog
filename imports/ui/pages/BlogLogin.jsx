@@ -25,7 +25,7 @@ class BlogLogin extends React.Component {
         if (err) {
           this.setState({submitErr: err.reason})
         } else {
-          Roles.userIsInRole(Meteor.userId(), 'admin') ? browserHistory.push('/blog_write') : this.setState({submitErr: '\'admin\' profile required to publish on blog'})
+          Roles.userIsInRole(Meteor.userId(), 'admin') ? browserHistory.replace('/blog_write') : this.setState({submitErr: '\'admin\' profile required to publish on blog'})
         }
       })
     }

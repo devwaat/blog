@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import React from 'react'
 import { BlogSubmitSchema } from '../../api/schemas.js'
 import { AutoForm, TextField, LongTextField, SubmitField, BoolField, ErrorsField, ErrorField } from 'uniforms-unstyled'
+import NavBar from '../components/NavBar.jsx'
 import { publishBlogEntry } from '../../api/methods.js'
 import { Roles } from 'meteor/alanning:roles'
 import { browserHistory } from 'react-router'
@@ -14,12 +15,22 @@ class BlogWrite extends React.Component {
     this.state = {submitMsg: '', marked: ''}
     this.insertBlogEntry = this.insertBlogEntry.bind(this)
     this.handleTextChange = this.handleTextChange.bind(this)
+    this.handleHome = this.handleHome.bind(this)
+    this.handleRead = this.handleRead.bind(this)
   }
 
   componentWillMount () {
     if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
       browserHistory.replace('/blog_login')
     }
+  }
+
+  handleHome () {
+    browserHistory.push('/')
+  }
+
+  handleRead () {
+    browserHistory.push('/blog_read')
   }
 
   handleTextChange (props, state) {
@@ -51,7 +62,11 @@ class BlogWrite extends React.Component {
   render () {
     return (
       <div>
-      <h1>Waat the blog</h1>
+      <h1>Post entry</h1>
+      <NavBar className='stories-feed-menu-bar' items={[
+        {className: 'stories-feed-menu-bar-home', display: 'Home', handleClick: this.handleHome},
+        {className: 'stories-feed-menu-bar-user', display: 'Read', handleClick: this.handleRead}
+      ]}/>
       <AutoForm schema={BlogSubmitSchema} onChange={this.handleTextChange} validate='onChangeAfterSubmit' onSubmit={(doc) => this.insertBlogEntry(doc)}>
           <TextField name='title'/>
           <LongTextField name='text'/>

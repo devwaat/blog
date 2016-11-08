@@ -9,6 +9,7 @@ import NavBar from '../components/NavBar.jsx'
 import InputText from '../components/InputText.jsx'
 import { Session } from 'meteor/session'
 import { browserHistory } from 'react-router'
+import { Roles } from 'meteor/alanning:roles'
 
 class BlogRead extends React.Component {
 
@@ -18,7 +19,7 @@ class BlogRead extends React.Component {
     this.handleNext = this.handleNext.bind(this)
     this.handlePrevious = this.handlePrevious.bind(this)
     this.handleHome = this.handleHome.bind(this)
-    this.handleUser = this.handleUser.bind(this)
+    this.handleShare = this.handleShare.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.nrCols = 4
   }
@@ -27,8 +28,12 @@ class BlogRead extends React.Component {
     browserHistory.push('/')
   }
 
-  handleUser () {
-    Meteor.userId() ? 'ir para a conta' : browserHistory.push('/login')
+  handleShare () {
+    if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+      browserHistory.push('/blog_write')
+    } else {
+      browserHistory.push('blog_login')
+    }
   }
 
   handleNext () {
@@ -44,7 +49,6 @@ class BlogRead extends React.Component {
   }
 
   handleSearch (event) {
-    console.log(event.target.value)
     Session.set('blogSearch', event.target.value)
   }
 
@@ -87,17 +91,15 @@ class BlogRead extends React.Component {
   }
 
   render () {
-    var userDisplay = Meteor.userId() ? 'Account' : 'Login'
-
     return (
       <div className= 'stories-feed'>
         <InputText className='stories-search' placeholder='Search' onChange={this.handleSearch}/>
         <NavBar className='stories-feed-menu-bar' items={[
           {className: 'stories-feed-menu-bar-home', display: 'Home', handleClick: this.handleHome},
-          {className: 'stories-feed-menu-bar-user', display: userDisplay, handleClick: this.handleUser}
+          {className: 'stories-feed-menu-bar-user', display: 'Share', handleClick: this.handleShare}
         ]}/>
         <div className='stories-feed-header'>
-          <p className='stories-feed-header-title' disabled={true} readOnly={true}>Waat The Blog</p>
+          <p className='stories-feed-header-title' disabled={true} readOnly={true}>Blog posts</p>
         </div>
         <div className='stories-feed-stories'>
         {this.props.blogEntries.map((entry, i) => {
