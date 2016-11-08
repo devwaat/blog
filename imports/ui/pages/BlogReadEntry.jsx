@@ -2,8 +2,8 @@
 import { Meteor } from 'meteor/meteor'
 import React from 'react'
 import Button from '../components/Button.jsx'
-import TextArea from '../components/TextArea.jsx'
 import { browserHistory } from 'react-router'
+import marked from 'marked'
 
 class BlogReadEntry extends React.Component {
 
@@ -28,7 +28,7 @@ class BlogReadEntry extends React.Component {
         <div className='detail-header'>
           <p className='detail-header-title'>{this.props.params.title}</p>
         </div>
-        <TextArea className='detail-story' value={this.props.params.text} disabled={true} readOnly={true}/>
+        <div dangerouslySetInnerHTML={{__html: marked(this.props.params.text)}}></div>
         <div className='detail-author'>{'Author: ' + this.props.params.author}</div>
         <Button className='detail-close-button' value='CLOSE' onClick={this.handleCloseClick} disabled={false}/>
       </div>

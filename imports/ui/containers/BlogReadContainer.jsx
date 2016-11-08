@@ -11,7 +11,7 @@ export default createContainer(() => {
 
   let options = {
     fields: BlogEntries.publicFields,
-    sort: {updatedate: -1},
+    sort: {updateDate: -1},
     limit: Session.get('blogEntriesLimit'),
     skip: Session.get('blogEntriesSkip')
   }

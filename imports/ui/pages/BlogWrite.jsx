@@ -5,18 +5,30 @@ import { AutoForm, TextField, LongTextField, SubmitField, BoolField, ErrorsField
 import { publishBlogEntry } from '../../api/methods.js'
 import { Roles } from 'meteor/alanning:roles'
 import { browserHistory } from 'react-router'
+import marked from 'marked'
 
 class BlogWrite extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {submitMsg: ''}
+    this.state = {submitMsg: '', marked: ''}
     this.insertBlogEntry = this.insertBlogEntry.bind(this)
+    this.handleTextChange = this.handleTextChange.bind(this)
   }
 
   componentWillMount () {
     if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
       browserHistory.replace('/blog_login')
+    }
+  }
+
+  handleTextChange (props, state) {
+    if (props === 'text' && state) {
+      this.setState({marked: marked(state)})
+      return
+    }
+    if (props === 'text' && !state) {
+      this.setState({marked: ''})
     }
   }
 
@@ -40,9 +52,10 @@ class BlogWrite extends React.Component {
     return (
       <div>
       <h1>Waat the blog</h1>
-        <AutoForm schema={BlogSubmitSchema} validate='onChangeAfterSubmit' onSubmit={(doc) => this.insertBlogEntry(doc)}>
+      <AutoForm schema={BlogSubmitSchema} onChange={this.handleTextChange} validate='onChangeAfterSubmit' onSubmit={(doc) => this.insertBlogEntry(doc)}>
           <TextField name='title'/>
           <LongTextField name='text'/>
+          <div dangerouslySetInnerHTML={{__html: this.state.marked}}></div>
           <BoolField name='published' type='checkbox'/>
           <ErrorsField/>
           <SubmitField value='Submit'/>
