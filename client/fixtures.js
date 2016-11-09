@@ -6,28 +6,28 @@ import { publishBlogEntry, blogEntriesCount } from '../imports/api/methods.js'
 
 const data = [
   {
-    title: 'Blog entry 5',
-    text: 'Text of blog entry 5\n this blog entry contains the word hello \n\n\n\n the end...',
+    title: 'Lorem Ipsum',
+    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n\n It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
     published: true
   },
   {
-    title: 'Blog entry 4',
-    text: 'Text of blog entry 4\n\n\n\n\n the end...',
+    title: 'Italic blog post',
+    text: 'This blog post contains * italic * text\n\n\This blog post contains * italic * text\n\n\This blog post contains * italic * text\n\n',
     published: true
   },
   {
-    title: 'Blog entry 3',
-    text: 'Text of blog entry 3\n\n\n\n\n the end...',
+    title: 'Bold Blog post',
+    text: 'This blog post contains ** bold ** text\n\n\This blog post contains ** bold ** text\n\n\This blog post contains ** bold ** text\n\n',
     published: true
   },
   {
-    title: 'Blog entry 2',
-    text: 'Text of blog entry 2\n\n this blog entry contains the word world\n\n\n the end...',
+    title: 'Link containing blog entry',
+    text: '[I\'m an inline-style link](https://www.google.com)',
     published: true
   },
   {
-    title: 'Blog entry 1',
-    text: 'Text of blog entry 1\n\n\n\n\n the end...',
+    title: 'Big and small',
+    text: '# BIG \n\n #### small...small...small...',
     published: true
   }
 ]

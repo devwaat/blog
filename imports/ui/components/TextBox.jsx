@@ -32,7 +32,7 @@ class TextBox extends React.Component {
           </div>
           <div className='col-md-1'>
             <div className='text-right'>
-              <Link className='btn btn-info btn-xs' to={`/blog_entry_detail/${this.props.title}/${this.props.text}/${this.props.author}`}>Read more</Link>
+              <Link className='btn btn-info btn-xs' to={`/blog_entry_detail/${this.props.title}/${encodeURIComponent(this.props.text)}/${this.props.author}`}>Read more</Link>
             </div>
           </div>
         </div>
