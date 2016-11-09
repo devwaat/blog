@@ -9,12 +9,12 @@ class NavBar extends React.Component {
 
   render () {
     return (
-      <div className={this.props.className}>
-        {this.props.items.map((item, i) => {
-          return <div key={i} className={item.className} onClick={item.handleClick}>{item.display}</div>
-        })
-        }
-      </div>
+        <ul className={this.props.className} role='navigation'>
+          {this.props.items.map((item, i) => {
+            return <li role='presentation' key={i} className={item.className} onClick={item.handleClick}>{item.display}</li>
+          })
+          }
+        </ul>
     )
   }
 

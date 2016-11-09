@@ -92,26 +92,52 @@ class BlogRead extends React.Component {
 
   render () {
     return (
-      <div className= 'stories-feed'>
-        <InputText className='stories-search' placeholder='Search' onChange={this.handleSearch}/>
-        <NavBar className='stories-feed-menu-bar' items={[
-          {className: 'stories-feed-menu-bar-home', display: 'Home', handleClick: this.handleHome},
-          {className: 'stories-feed-menu-bar-user', display: 'Share', handleClick: this.handleShare}
-        ]}/>
-        <div className='stories-feed-header'>
-          <p className='stories-feed-header-title' disabled={true} readOnly={true}>Blog posts</p>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-2'>
+            <div className='text-left'>
+              <InputText className='stories-search' placeholder='Search' onChange={this.handleSearch}/>
+            </div>
+          </div>
+          <div className='col-md-10'>
+            <div className='text-right'>
+              <NavBar className='nav nav-pills pull-right' items={[
+                {display: 'Home', handleClick: this.handleHome},
+                {display: 'Share', handleClick: this.handleShare}
+              ]}/>
+            </div>
+          </div>
         </div>
-        <div className='stories-feed-stories'>
+        <div className='row'>
+          <div className='col-md-12'>
+            <div className='text-center'>
+              <h2>Blog posts</h2>
+            </div>
+          </div>
+        </div>
+        <div className='row'>
         {this.props.blogEntries.map((entry, i) => {
           if (i < this.nrCols) {
-            return <TextBox key={i} className='stories-feed-stories-story' title={entry.title} resizedTitle={this.resizeTitle(entry.title)} resizedText={this.resizeEntry(entry.text)} text={entry.text} date={this.formatDate(entry.updateDate)} author={entry.author}/>
+            return (
+            <div key={i} className='col-md-3'>
+              <TextBox key={i} className='container' title={entry.title} resizedTitle={this.resizeTitle(entry.title)} resizedText={this.resizeEntry(entry.text)} text={entry.text} date={this.formatDate(entry.updateDate)} author={entry.author}/>
+            </div>
+            )
           }
         })
           }
         </div>
-        <div className='stories-feed-footer'>
-          <Button className='stories-feed-footer-previous' value='PREVIOUS' onClick={this.handlePrevious} disabled={Session.get('blogEntriesSkip') === 0 ? true : false }/>
-          <Button className='stories-feed-footer-next' value='NEXT' onClick={this.handleNext} disabled={this.props.blogEntries.length === Session.get('blogEntriesLimit') ? false : true}/>
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='text-right'>
+                <Button className='btn btn-primary' value='Prev' onClick={this.handlePrevious} disabled={Session.get('blogEntriesSkip') === 0 ? true : false }/>
+              </div>
+          </div>
+          <div className='col-md-6'>
+            <div className='text-left'>
+              <Button className='btn btn-primary' value='Next' onClick={this.handleNext} disabled={this.props.blogEntries.length === Session.get('blogEntriesLimit') ? false : true}/>
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -11,14 +11,31 @@ class BlogWelcome extends React.Component {
   }
 
   render () {
-    let shareLink = Roles.userIsInRole(Meteor.userId(), 'admin') ? <Link to='/blog_write'>Share</Link> : <Link to='/blog_login'>Share</Link>
+    let shareLink = Roles.userIsInRole(Meteor.userId(), 'admin')
+      ? <Link className='btn btn-warning' to='/blog_write'>Share</Link>
+      : <Link className='btn btn-info' to='/blog_login'>Share</Link>
     return (
-      <div>
-        <p>Waat the blog?</p>
-        <Link to='/blog_read'>Read</Link>
-        {shareLink}
+      <div className='jumbotron'>
+        <div className='row'>
+          <div className='col-md-12'>
+            <div className='text-center'>
+              <h1>Waat the blog?</h1>
+            </div>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='text-right'>
+              <Link className='btn btn-primary' to='/blog_read'>Read</Link>
+            </div>
+          </div>
+          <div className='col-md-6'>
+            <div className='text-left'>
+              {shareLink}
+              </div>
+          </div>
+        </div>
       </div>
-
     )
   }
 }

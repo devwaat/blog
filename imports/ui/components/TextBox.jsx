@@ -12,13 +12,29 @@ class TextBox extends React.Component {
   render () {
     return (
       <div className={this.props.className}>
-        <div className='stories-feed-stories-story-title-box'>
-          <p className='stories-feed-stories-story-title-box-title' disabled={true} readOnly={true}>{this.props.resizedTitle}</p>
+        <div className='row'>
+          <div className='col-md-3'>
+            <div className='text-center'>
+              <h3>{this.props.resizedTitle}</h3>
+            </div>
+          </div>
         </div>
-        <div className='stories-feed-stories-story-text' dangerouslySetInnerHTML={{__html: marked(this.props.resizedText)}}></div>
-        <div className='stories-feed-stories-story-footer'>
-          <div className='stories-feed-stories-story-footer-context'>{this.props.author + ' - ' + this.props.date}</div>
-          <Link className='stories-feed-stories-story-footer-read' to={`/blog_entry_detail/${this.props.title}/${this.props.text}/${this.props.author}`}>Read more</Link>
+        <div className='row'>
+          <div className='col-md-3'>
+            <div dangerouslySetInnerHTML={{__html: marked(this.props.resizedText)}}></div>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-2'>
+            <div className='text-left'>
+              <h5>{this.props.author + ' - ' + this.props.date}</h5>
+            </div>
+          </div>
+          <div className='col-md-1'>
+            <div className='text-right'>
+              <Link className='btn btn-info btn-xs' to={`/blog_entry_detail/${this.props.title}/${this.props.text}/${this.props.author}`}>Read more</Link>
+            </div>
+          </div>
         </div>
       </div>
     )

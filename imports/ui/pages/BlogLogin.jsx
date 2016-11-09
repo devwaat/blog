@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import React from 'react'
 import { UserLoginSchema } from '../../api/schemas.js'
-import { AutoForm, TextField, SubmitField, BoolField, ErrorsField, ErrorField } from 'uniforms-unstyled'
+import { AutoForm, TextField, SubmitField, BoolField, ErrorsField, ErrorField } from 'uniforms-bootstrap4'
 import { Accounts } from 'meteor/accounts-base'
 import { Roles } from 'meteor/alanning:roles'
 import { browserHistory } from 'react-router'
@@ -16,7 +16,7 @@ class BlogLogin extends React.Component {
   }
 
   toggleShowPass (event) {
-    this.setState({showPass: event.target.checked})
+    this.setState({showPass: event})
   }
 
   loginWithPassword (doc) {
@@ -33,12 +33,18 @@ class BlogLogin extends React.Component {
 
   render () {
     return (
-      <div>
-        <h1> Hello </h1>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-12'>
+            <div className='text-center'>
+              <h2>Please login...</h2>
+            </div>
+          </div>
+        </div>
         <AutoForm schema={UserLoginSchema} validate='onChangeAfterSubmit' onSubmit={doc => this.loginWithPassword(doc)}>
           <TextField name='username'/>
           <TextField name='password' type={this.state.showPass ? 'text' : 'password'}/>
-          <BoolField name='showpass' type='checkbox' onClick={this.toggleShowPass}>Show password</BoolField>
+          <BoolField name='showpass' type='checkbox' value={this.state.showPass} onChange={this.toggleShowPass}>Show password</BoolField>
           <ErrorsField/>
           <SubmitField value='Login'/>
           <ErrorField name='submitErr' errorMessage={this.state.submitErr}/>
