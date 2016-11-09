@@ -15,13 +15,17 @@ class BlogRead extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {inputSearch: Session.get('blogSearch')}
     this.handleNext = this.handleNext.bind(this)
     this.handlePrevious = this.handlePrevious.bind(this)
     this.handleHome = this.handleHome.bind(this)
     this.handleShare = this.handleShare.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.nrCols = 4
+  }
+
+  componentWillMount () {
+    this.setState({inputSearch: Session.get('blogSearch')})
   }
 
   handleHome () {
@@ -50,6 +54,8 @@ class BlogRead extends React.Component {
 
   handleSearch (event) {
     Session.set('blogSearch', event.target.value)
+    this.setState({inputSearch: event.target.value})
+    Session.set('blogEntriesSkip', 0)
   }
 
   resizeTitle (title) {
@@ -96,7 +102,7 @@ class BlogRead extends React.Component {
         <div className='row'>
           <div className='col-md-2'>
             <div className='text-left'>
-              <InputText className='stories-search' placeholder='Search' onChange={this.handleSearch}/>
+              <InputText value={this.state.inputSearch} placeholder='Search' onChange={this.handleSearch}/>
             </div>
           </div>
           <div className='col-md-10'>

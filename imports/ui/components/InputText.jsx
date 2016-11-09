@@ -11,7 +11,7 @@ class InputText extends React.Component {
     return (
       <input
         type='text'
-        value={this.state.value}
+        value={this.props.value}
         placeholder={this.props.placeholder}
         className={this.props.className}
         disabled={this.props.disabled}
@@ -26,6 +26,7 @@ class InputText extends React.Component {
 
 InputText.propTypes = {
   className: React.PropTypes.string,
+  value: React.PropTypes.string,
   placeholder: React.PropTypes.string,
   disabled: React.PropTypes.bool,
   readOnly: React.PropTypes.bool,
