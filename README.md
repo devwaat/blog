@@ -4,8 +4,8 @@
 
 
 On starting meteor two test users will be created: 
-  'test-user'/'test-user' a general user with role 'other'
-  'blog-admin'/'blog-admin' an admin user with role 'admin' that allows it to submmit blog posts
++  'test-user'/'test-user' a general user with role 'other'
++  'blog-admin'/'blog-admin' an admin user with role 'admin' that allows it to submmit blog posts
 
 
 Five *dummy* blog posts will also be created to test the search and markdown syntax functionalities
