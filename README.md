@@ -23,5 +23,9 @@ Five *dummy* blog posts will also be created to test the search and markdown syn
 *  bootstrap (simple styling and layout)
 
 
-#### Note: Session variables could be easily externalized when incorporating blog on broader application (i.e. Redux)
+#### Improvements: 
+
+
++  Session variables could be easily externalized when incorporating blog on broader application (i.e. Redux)
++  Markdown is being rendered within *dangerouslySetInnerHTML*. A beter solution would be to use a rich text editor like Draft.js 
 
