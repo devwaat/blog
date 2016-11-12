@@ -12,7 +12,7 @@ class BlogWelcome extends React.Component {
 
   render () {
     let shareLink = Roles.userIsInRole(Meteor.userId(), 'admin')
-      ? <Link className='btn btn-warning' to='/blog_write'>Share</Link>
+      ? <Link className='btn btn-info' to='/blog_write'>Share</Link>
       : <Link className='btn btn-info' to='/blog_login'>Share</Link>
     return (
       <div className='jumbotron'>

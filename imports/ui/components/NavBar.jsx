@@ -11,7 +11,7 @@ class NavBar extends React.Component {
     return (
         <ul className={this.props.className} role='navigation'>
           {this.props.items.map((item, i) => {
-            return <li role='presentation' key={i} className={item.className} onClick={item.handleClick}>{item.display}</li>
+            return <li role='presentation' key={i} className={item.className} onClick={item.handleClick} disabled={item.disabled}>{item.display}</li>
           })
           }
         </ul>
@@ -25,7 +25,8 @@ NavBar.propTypes = {
   items: React.PropTypes.arrayOf(React.PropTypes.shape({
     className: React.PropTypes.string,
     display: React.PropTypes.string,
-    handleClick: React.PropTypes.func
+    handleClick: React.PropTypes.func,
+    disabled: React.PropTypes.bool
   })).isRequired
 }
 

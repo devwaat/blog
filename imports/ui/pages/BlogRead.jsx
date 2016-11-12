@@ -1,6 +1,6 @@
 /* eslint no-unneeded-ternary:0 */
 
-//  import '../stylesheets/read.scss'
+import '../styling/general.css'
 import React from 'react'
 import { Meteor } from 'meteor/meteor'
 import TextBox from '../components/TextBox.jsx'
@@ -98,7 +98,7 @@ class BlogRead extends React.Component {
 
   render () {
     return (
-      <div className='container'>
+      <div className='container-fluid'>
         <div className='row'>
           <div className='col-md-2'>
             <div className='text-left'>
@@ -106,12 +106,10 @@ class BlogRead extends React.Component {
             </div>
           </div>
           <div className='col-md-10'>
-            <div className='text-right'>
               <NavBar className='nav nav-pills pull-right' items={[
                 {display: 'Home', handleClick: this.handleHome},
                 {display: 'Share', handleClick: this.handleShare}
               ]}/>
-            </div>
           </div>
         </div>
         <div className='row'>
@@ -121,29 +119,26 @@ class BlogRead extends React.Component {
             </div>
           </div>
         </div>
-        <div className='row'>
+        <div className='row text-box'>
         {this.props.blogEntries.map((entry, i) => {
           if (i < this.nrCols) {
             return (
-            <div key={i} className='col-md-3'>
-              <TextBox key={i} className='container' title={entry.title} resizedTitle={this.resizeTitle(entry.title)} resizedText={this.resizeEntry(entry.text)} text={entry.text} date={this.formatDate(entry.updateDate)} author={entry.author}/>
-            </div>
+              <TextBox key={i} className='col-md-3' title={entry.title} resizedTitle={this.resizeTitle(entry.title)}
+              resizedText={this.resizeEntry(entry.text)} text={entry.text} date={this.formatDate(entry.updateDate)} author={entry.author}/>
             )
           }
         })
           }
-        </div>
-        <div className='row'>
-          <div className='col-md-6'>
-            <div className='text-right'>
-                <Button className='btn btn-primary' value='Prev' onClick={this.handlePrevious} disabled={Session.get('blogEntriesSkip') === 0 ? true : false }/>
-              </div>
           </div>
-          <div className='col-md-6'>
-            <div className='text-left'>
-              <Button className='btn btn-primary' value='Next' onClick={this.handleNext} disabled={this.props.blogEntries.length === Session.get('blogEntriesLimit') ? false : true}/>
-            </div>
-          </div>
+          <div className='row'>
+           <footer className='footer'>
+             <div className='container'>
+               <Button className='btn btn-primary' value='Prev' onClick={this.handlePrevious}
+               disabled={Session.get('blogEntriesSkip') === 0 ? true : false}></Button>
+               <Button className='btn btn-primary' value='Next' onClick={this.handleNext}
+               disabled={this.props.blogEntries.length === Session.get('blogEntriesLimit') ? false : true}></Button>
+             </div>
+          </footer>
         </div>
       </div>
     )
