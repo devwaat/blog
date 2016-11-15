@@ -22,6 +22,10 @@ class BlogWrite extends React.Component {
   }
 
   componentWillMount () {
+    marked.setOptions({
+      breaks: true
+    })
+
     if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
       browserHistory.replace('/blog_login')
     }
