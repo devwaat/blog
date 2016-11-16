@@ -1,10 +1,10 @@
 import React from 'react'
 import { Router, Route, browserHistory } from 'react-router'
-import BlogWelcome from '../../ui/pages/BlogWelcome.jsx'
-import BlogLogin from '../../ui/pages/BlogLogin.jsx'
-import BlogWrite from '../../ui/pages/BlogWrite.jsx'
-import BlogReadContainer from '../../ui/containers/BlogReadContainer.jsx'
-import BlogReadEntry from '../../ui/pages/BlogReadEntry.jsx'
+import BlogWelcome from '../../ui/pages/BlogWelcome.js'
+import BlogLogin from '../../ui/pages/BlogLogin.js'
+import BlogWrite from '../../ui/pages/BlogWrite.js'
+import BlogReadContainer from '../../ui/containers/BlogReadContainer.js'
+import BlogReadEntry from '../../ui/pages/BlogReadEntry.js'
 
 export const routes = () => (
   <Router history={browserHistory}>

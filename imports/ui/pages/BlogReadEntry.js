@@ -1,7 +1,7 @@
 import '../styling/general.css'
 import { Meteor } from 'meteor/meteor'
 import React from 'react'
-import Button from '../components/Button.jsx'
+import Button from '../components/Button.js'
 import { browserHistory } from 'react-router'
 import marked from 'marked'
 

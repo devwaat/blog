@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { createContainer } from 'meteor/react-meteor-data'
-import BlogRead from '../pages/BlogRead.jsx'
+import BlogRead from '../pages/BlogRead.js'
 import { BlogEntries } from '../../api/collections.js'
 import { Session } from 'meteor/session'
 
