@@ -3,32 +3,41 @@ import React from 'react'
 import { BlogSubmitSchema } from '../../api/schemas.js'
 import { AutoForm, TextField, LongTextField, SubmitField, BoolField, ErrorsField, ErrorField } from 'uniforms-bootstrap4'
 import NavBar from '../components/NavBar.js'
-import { publishBlogEntry } from '../../api/methods.js'
+import Button from '../components/Button.js'
+import { updateBlogEntry } from '../../api/methods.js'
 import { Roles } from 'meteor/alanning:roles'
 import { browserHistory } from 'react-router'
 import marked from 'marked'
 import { Accounts } from 'meteor/accounts-base'
 
-class BlogWrite extends React.Component {
+class BlogUpdate extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {submitMsg: '', marked: ''}
-    this.insertBlogEntry = this.insertBlogEntry.bind(this)
-    this.handleTextChange = this.handleTextChange.bind(this)
+    this.state = {submitMsg: '',
+                  marked: '',
+                  title: this.props.params.title,
+                  text: this.props.params.text,
+                  published: false}
+    this.updateBlogEntry = this.updateBlogEntry.bind(this)
+    this.handleFormChange = this.handleFormChange.bind(this)
     this.handleHome = this.handleHome.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleRead = this.handleRead.bind(this)
   }
 
   componentWillMount () {
-    marked.setOptions({
-      breaks: true
-    })
-
     if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
       browserHistory.replace('/blog_login')
     }
+
+    marked.setOptions({
+      breaks: true
+    })
+  }
+
+  handleClose () {
+    browserHistory.goBack()
   }
 
   handleHome () {
@@ -47,27 +56,36 @@ class BlogWrite extends React.Component {
     browserHistory.push('/blog_read')
   }
 
-  handleTextChange (props, state) {
-    if (props === 'text' && state) {
-      this.setState({marked: marked(state)})
+  handleFormChange (props, state) {
+    if (props === 'title') {
+      this.setState({title: state})
       return
     }
-    if (props === 'text' && !state) {
-      this.setState({marked: ''})
+
+    if (props === 'text') {
+      this.setState({marked: marked(state)})
+      this.setState({text: state})
+      return
+    }
+
+    if (props === 'published') {
+      this.setState({published: state})
+      return
     }
   }
 
-  insertBlogEntry (doc) {
+  updateBlogEntry (doc) {
     if (doc.title && doc.text) {
-      publishBlogEntry.call({
+      updateBlogEntry.call({
+        id: this.props.params.id,
         title: doc.title,
         text: doc.text,
-        published: doc.published || false
+        published: doc.published
       }, (err, res) => {
         if (err) {
           this.setState({submitMsg: err.reason})
         } else {
-          this.setState({submitMsg: 'Blog entry submitted!'})
+          this.setState({submitMsg: 'Blog entry updated!'})
         }
       })
     }
@@ -90,27 +108,34 @@ class BlogWrite extends React.Component {
         <div className='row'>
           <div className='col-md-12'>
             <div className='text-center'>
-              <h2>Post entry</h2>
+              <h2>Update post</h2>
             </div>
           </div>
         </div>
-        <AutoForm schema={BlogSubmitSchema} onChange={this.handleTextChange} validate='onChangeAfterSubmit' onSubmit={(doc) => this.insertBlogEntry(doc)}>
-          <TextField name='title'/>
-          <LongTextField name='text'/>
+        <AutoForm schema={BlogSubmitSchema} onChange={this.handleFormChange} validate='onChangeAfterSubmit' onSubmit={(doc) => this.updateBlogEntry(doc)}>
+          <TextField name='title' value={this.state.title}/>
+          <LongTextField name='text' value={this.state.text}/>
           <h6>Markdown rendering:</h6>
           <div dangerouslySetInnerHTML={{__html: this.state.marked}}></div>
-          <BoolField name='published' type='checkbox'/>
+          <BoolField name='published' type='checkbox' value={this.state.published}/>
           <ErrorsField/>
           <SubmitField value='Submit'/>
           <ErrorField name='submitMsg' errorMessage={this.state.submitMsg}/>
         </AutoForm>
+        <div className='row footer'>
+          <div className='col-md-12'>
+            <div className='text-center'>
+              <Button className='btn btn-primary' value='Close' onClick={this.handleClose} disabled={false}/>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
 }
 
-BlogWrite.propTypes = {}
+BlogUpdate.propTypes = {}
 
-BlogWrite.defaultProps = {}
+BlogUpdate.defaultProps = {}
 
-export default BlogWrite
+export default BlogUpdate

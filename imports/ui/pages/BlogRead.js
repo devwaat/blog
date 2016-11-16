@@ -123,7 +123,7 @@ class BlogRead extends React.Component {
         {this.props.blogEntries.map((entry, i) => {
           if (i < this.nrCols) {
             return (
-              <TextBox key={i} className='col-md-3' title={entry.title} resizedTitle={this.resizeTitle(entry.title)}
+              <TextBox key={i} className='col-md-3' id={entry._id} title={entry.title} resizedTitle={this.resizeTitle(entry.title)} published={entry.published}
               resizedText={this.resizeEntry(entry.text)} text={entry.text} date={this.formatDate(entry.updateDate)} author={entry.author}/>
             )
           }

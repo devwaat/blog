@@ -20,3 +20,15 @@ let publishRule = {
 
 // Only allow 5 list operations per connection per second
 DDPRateLimiter.addRule(publishRule, 5, 1000)
+
+// Rate limit per connection ID
+let updateRule = {
+  userId: function (userId) {
+    return Meteor.users.findOne(userId)
+  },
+  type: 'method',
+  name: 'updateBlogEntry'
+}
+
+// Only allow 5 list operations per connection per second
+DDPRateLimiter.addRule(updateRule, 5, 1000)

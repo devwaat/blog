@@ -10,15 +10,13 @@ class BlogReadEntry extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
-
-    this.handleCloseClick = this.handleCloseClick.bind(this)
   }
 
   componentWillMount () {
     this.setState({})
   }
 
-  handleCloseClick (e) {
+  handleCloseClick () {
     browserHistory.goBack()
   }
 

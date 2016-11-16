@@ -77,6 +77,29 @@ export const BlogEntrySchema = new SimpleSchema({
   }
 })
 
+export const BlogEntryUpdateSchema = new SimpleSchema({
+  id: {
+    type: SimpleSchema.RegEx.Id,
+    label: 'Id',
+    optional: false
+  },
+  title: {
+    type: String,
+    label: 'Title',
+    optional: false
+  },
+  text: {
+    type: String,
+    label: 'Text',
+    optional: false
+  },
+  published: {
+    type: Boolean,
+    label: 'Published',
+    optional: true
+  }
+})
+
 export const BlogEntriesPubSchema = new SimpleSchema({
   searchVal: {
     type: String,
