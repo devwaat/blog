@@ -27,7 +27,7 @@ Five *dummy* blog posts will also be created to test the search and markdown syn
 
 
 +  Session variables could be easily externalized when incorporating blog on broader application (i.e. Redux)
-+  Markdown is being rendered within *dangerouslySetInnerHTML*. A better solution would be to use a rich text editor like Draft.js 
++  Markdown is being rendered within div innerHTML. An alternative solution would be to use a rich text editor like Draft.js 
 
 
 ##### To install clone repo and run npm install
